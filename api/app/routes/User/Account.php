@@ -15,7 +15,7 @@ $app->post("/userLogin/", function() use($app){
     try{
 
         $connection = getConnection();
-        $dbh = $connection->prepare("SELECT Cl.Client_Id, Cl.Conekta_Id, Cl.FirstName, Cl.FLastName, Cl.SLastName, Cl.Email, Cl.Phone, Cl.Password, Cl.Salt, Ca.Conekta_Card
+        $dbh = $connection->prepare("SELECT Cl.Client_Id, Cl.Conekta_Id, Cl.FirstName, Cl.LastName, Cl.Email, Cl.Phone, Cl.Password, Cl.Salt, Ca.Conekta_Card
             FROM Client Cl
             LEFT JOIN Card Ca ON Cl.Client_Id = Ca.Client_Id WHERE Email = :E");
         $dbh->bindParam(':E', $email);
@@ -89,8 +89,7 @@ $app->post("/userRegister/", function() use($app){
     $data = json_decode($json, true);
 
     $firstname = $data['FirstName'];
-    $flastname = $data['FLastName'];
-    $slastname = $data['SLastName'];
+    $lastname = $data['LastName'];
     $phone = $data['Phone'];
     $email = $data['Email'];
     $password = $data['Password'];
@@ -157,12 +156,11 @@ $app->post("/userRegister/", function() use($app){
                 $Salt = $hash["salt"];
             }
 
-            $dbh = $connection->prepare("INSERT INTO Client (Conekta_Id, FirstName, FLastName, SLastName, Phone, Email, Password, Salt, Gcm_Id, Created_At, Client_Type_Id, ClientActv_Id) 
+            $dbh = $connection->prepare("INSERT INTO Client (Conekta_Id, FirstName, LastName, Phone, Email, Password, Salt, Gcm_Id, Created_At, Client_Type_Id, ClientActv_Id) 
                 VALUES( :CI, :FN, :FLN, :SLN, :P, :E, :EP, :S, :GI, NOW(), :CT, :CA)");
             $dbh->bindParam(':CI', $customer->id);
             $dbh->bindParam(':FN', $firstname);
-            $dbh->bindParam(':FLN', $flastname);
-            $dbh->bindParam(':SLN', $slastname);
+            $dbh->bindParam(':LN', $lastname);
             $dbh->bindParam(':P', $phone);
             $dbh->bindParam(':E', $email);
             $dbh->bindParam(':EP', $Encrypted_Password);
@@ -189,6 +187,101 @@ $app->post("/userRegister/", function() use($app){
     }
 });
 
+$app->post("/userUpdate/", function() use($app){
+
+    $json = $app->request->getBody();
+    $data = json_decode($json, true);
+
+    $client_id = $data['Client_Id'];
+    $password = $data['Password'];
+    $newPassword = $data['NewPassword'];
+    $image = $data['Image'];
+    $changePassword = $data['ChangePassword'];
+    $response = array();
+
+    try{
+
+        if ($changePassword) {
+            $connection = getConnection();
+            $dbh = $connection->prepare("SELECT Password, Salt FROM Client WHERE Client_Id = :CID");
+            $dbh->bindParam(':CID', $client_id);
+            $dbh->execute();
+            $result = $dbh->fetchObject();
+
+            $chk = verify_encrypt_Password($password, $result->Password, $result->Salt);
+            if ($chk) {
+                $hash = encrypt_password($newPassword);
+                $Encrypted_Password = $hash["encrypted"];
+                $Salt = $hash["salt"];
+
+                $dbh = $connection->prepare("UPDATE Client SET Password = :P, Salt = :S WHERE Client_Id = :CID");
+                $dbh->bindParam(':P', $Encrypted_Password);
+                $dbh->bindParam(':S', $Salt);
+                $dbh->bindParam(':CID', $client_id);
+                $dbh->execute();
+
+                if ($dbh) {
+                    $connection = null;
+                    $response['Message'] = "Contraseña actualizada correctamente";
+                    $response['IsError'] = false;
+                    $response['Data'] = null;
+
+                    $app->response->headers->set("Content-type", "application/json");
+                    $app->response->status(200);
+                    $app->response->body(json_encode($response));
+                }
+                else{
+                    $connection = null;
+                    $response['Message'] = "No se pudo actualizar la contraseña";
+                    $response['IsError'] = false;
+                    $response['Data'] = null;
+
+                    $app->response->headers->set("Content-type", "application/json");
+                    $app->response->status(200);
+                    $app->response->body(json_encode($response));
+                }
+            }
+        }
+        else {
+            $connection = getConnection();
+            $dbh = $connection->prepare("UPDATE FROM Client SET Image = :I WHERE Client_Id = :CID");
+            $dbh->bindParam(':I', $image);
+            $dbh->bindParam(':CID', $client_id);
+            $dbh->execute();
+
+            if ($dbh) {
+                $connection = null;
+                $response['Message'] = "Imagen actualizada correctamente";
+                $response['IsError'] = false;
+                $response['Data'] = null;
+
+                $app->response->headers->set("Content-type", "application/json");
+                $app->response->status(200);
+                $app->response->body(json_encode($response));
+            }
+            else{
+                $connection = null;
+                $response['Message'] = "No se pudo actualizar la imagen";
+                $response['IsError'] = false;
+                $response['Data'] = null;
+
+                $app->response->headers->set("Content-type", "application/json");
+                $app->response->status(200);
+                $app->response->body(json_encode($response));
+            }
+        }
+
+    }catch(PDOException $e){
+        $response['Message'] = $e->getMessage();
+        $response['IsError'] = true;
+        $response['Data'] = null;
+
+        $app->response->headers->set("Content-type", "application/json");
+        $app->response->status(200);
+        $app->response->body(json_encode($response));
+    }
+});
+
 function verify_encrypt_Password ($Password, $Encrypted_Password, $Salt){
 
     $hash = base64_encode(sha1($Password . $Salt, true) . $Salt);
@@ -211,7 +304,7 @@ function encrypt_password ($Password){
 function get_user_data($user){
     $dataResp = array();
     $dataResp['Client_Id'] = $user->Client_Id;
-    $dataResp['Name'] = $user->FirstName . ' ' . $user->FLastName . ' ' . $user->SLastName;
+    $dataResp['Name'] = $user->FirstName . ' ' . $user->LastName;
     $dataResp['Email'] = $user->Email;
     $dataResp['Phone'] = $user->Phone;
     return $dataResp;
