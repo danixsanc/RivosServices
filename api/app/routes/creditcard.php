@@ -9,8 +9,8 @@ $app->delete("/delete_card/:id", function($id) use($app){
 	$json = $app->request->getBody();
     $data = json_decode($json, true);
 
-    $dataf = $data['data'];
-    $Client_Id = $dataf['Client_Id'];
+
+    $Client_Id = $data['Client_Id'];
 	$response = array();
 
 	try{
