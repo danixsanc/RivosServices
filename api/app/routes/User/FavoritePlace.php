@@ -84,7 +84,7 @@ $app->post("/setFavoritePlace/", function() use($app){
             $response['Data'] = null;
 
             $app->response->headers->set("Content-type", "application/json");
-            $app->response->status(400);
+            $app->response->status(200);
             $app->response->body(json_encode($response));
         }
 
@@ -101,14 +101,19 @@ $app->post("/setFavoritePlace/", function() use($app){
             $dbh->bindParam(':CID', $Client_Id);
             $dbh->execute();
 
+
+            $lastIdArray = array();
+            $lastIdArray['Place_Favorite_Id'] = $connection->lastInsertId();
+
+
             if ($dbh) {
                 $connection = null;
                 $response['Message'] = "Registrado Correctamente";
                 $response['IsError'] = false;
-                $response['Data'] = null;
+                $response['Data'] = $lastIdArray;
 
                 $app->response->headers->set("Content-type", "application/json");
-                $app->response->status(400);
+                $app->response->status(200);
                 $app->response->body(json_encode($response));
             }
         }
@@ -153,7 +158,7 @@ $app->delete("/Delete_FavoritePlace/:id", function($id) use($app){
             $response['data'] = "No se pudo eliminar el lugar";
 
             $app->response->headers->set("Content-type", "application/json");
-            $app->response->status(400);
+            $app->response->status(200);
             $app->response->body(json_encode($response));
         }
 
@@ -165,6 +170,60 @@ $app->delete("/Delete_FavoritePlace/:id", function($id) use($app){
 
         $app->response->headers->set("Content-type", "application/json");
         $app->response->status(400);
+        $app->response->body(json_encode($response));
+    }
+});
+
+
+
+$app->post("/FavoritePlaceUpdate/", function() use($app){
+
+    $json = $app->request->getBody();
+    $data = json_decode($json, true);
+
+    $F_Id = $data['Place_Favorite_Id'];
+    $Name = $data['Name'];
+
+    $response = array();
+
+    try{
+
+
+            $connection = getConnection();
+            $dbh = $connection->prepare("UPDATE Place_Favorite SET Name = :N WHERE Place_Favorite_Id = :FID");
+            $dbh->bindParam(':N', $Name);
+            $dbh->bindParam(':FID', $F_Id);
+            $dbh->execute();
+
+            if ($dbh) {
+                $connection = null;
+                $response['Message'] = "Nombre actualizado correctamente";
+                $response['IsError'] = false;
+                $response['Data'] = null;
+
+                $app->response->headers->set("Content-type", "application/json");
+                $app->response->status(200);
+                $app->response->body(json_encode($response));
+            }
+            else{
+                $connection = null;
+                $response['Message'] = "No se pudo actualizar el nombre";
+                $response['IsError'] = false;
+                $response['Data'] = null;
+
+                $app->response->headers->set("Content-type", "application/json");
+                $app->response->status(200);
+                $app->response->body(json_encode($response));
+            }
+        
+
+    }catch(PDOException $e){
+        $response['Message'] = $e->getMessage();
+        $response['IsError'] = true;
+        $response['Data'] = null;
+
+        $app->response->headers->set("Content-type", "application/json");
+        $app->response->status(200);
         $app->response->body(json_encode($response));
     }
 });
