@@ -117,3 +117,55 @@ $app->post("/setFavoritePlace/", function() use($app){
         echo "Error: " . $e->getMessage();
     }
 });
+
+
+$app->delete("/Delete_FavoritePlace/:id", function($id) use($app){
+
+
+    $json = $app->request->getBody();
+    $data = json_decode($json, true);
+
+    $Client_Id = $data['Client_Id'];
+    $response = array();
+
+    try{
+
+        $connection = getConnection();
+        $dbh = $connection->prepare("DELETE FROM Place_Favorite WHERE (Client_Id = :CID) AND (Place_Favorite_Id = :PFID)");
+        $dbh->bindParam(':CID', $Client_Id);
+        $dbh->bindParam(':PFID', $id);
+        $dbh->execute();
+
+        if ($dbh == true) {
+            $connection = null;
+            $response['message'] = "OK";
+            $response['IsError'] = false;
+            $response['data'] = "Lugar eliminado correctamente";
+
+            $app->response->headers->set("Content-type", "application/json");
+            $app->response->status(200);
+            $app->response->body(json_encode($response));
+        }
+        else {
+            $connection = null;
+            $response['message'] = "OK";
+            $response['IsError'] = false;
+            $response['data'] = "No se pudo eliminar el lugar";
+
+            $app->response->headers->set("Content-type", "application/json");
+            $app->response->status(400);
+            $app->response->body(json_encode($response));
+        }
+
+    }catch(PDOException $e){
+        $connection = null;
+        $response['message'] = "OK";
+        $response['IsError'] = false;
+        $response['data'] = "Error: " . $e->getMessage();
+
+        $app->response->headers->set("Content-type", "application/json");
+        $app->response->status(400);
+        $app->response->body(json_encode($response));
+    }
+});
+
