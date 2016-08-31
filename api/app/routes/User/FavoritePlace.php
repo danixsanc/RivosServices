@@ -26,7 +26,7 @@ $app->get("/getFavoritePlace/:id", function($id) use($app){
         else {
             $connection = null;
 
-            $response['Message'] = "No hay favoritos";
+            $response['Message'] = "No hay favoritos..";
             $response['IsError'] = false;
             $response['Data'] = null;
 
