@@ -101,12 +101,12 @@ $app->post("/setFavoritePlace/", function() use($app){
             $dbh->bindParam(':CID', $Client_Id);
             $dbh->execute();
 
-
-            $lastIdArray = array();
-            $lastIdArray['Place_Favorite_Id'] = $connection->lastInsertId();
-
-
             if ($dbh) {
+            
+                $lastIdArray = array();
+                $lastIdArray['Place_Favorite_Id'] = $connection->lastInsertId();
+
+
                 $connection = null;
                 $response['Message'] = "Registrado Correctamente";
                 $response['IsError'] = false;
@@ -124,7 +124,7 @@ $app->post("/setFavoritePlace/", function() use($app){
 });
 
 
-$app->delete("/Delete_FavoritePlace/:id", function($id) use($app){
+$app->delete("/deleteFavoritePlace/:id", function($id) use($app){
 
 
     $json = $app->request->getBody();
@@ -176,7 +176,7 @@ $app->delete("/Delete_FavoritePlace/:id", function($id) use($app){
 
 
 
-$app->post("/FavoritePlaceUpdate/", function() use($app){
+$app->post("/updateFavoritePlace/", function() use($app){
 
     $json = $app->request->getBody();
     $data = json_decode($json, true);
