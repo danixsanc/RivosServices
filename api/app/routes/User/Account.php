@@ -67,15 +67,45 @@ $app->post("/userLogin/", function() use($app){
         }
 
         else {
-            $connection = null;
 
-            $response['Message'] = "El correo no existe";
-            $response['IsError'] = false;
-            $response['Data'] = null;
+            if ($login_fb) {
+                $dbh = $connection->prepare("INSERT INTO Client (Conekta_Id, FirstName, LastName, Phone, Email, Password, Salt, Gcm_Id, Created_At, Client_Type_Id, ClientActv_Id) 
+                VALUES( :CI, :FN, :FLN, :SLN, :P, :E, :EP, :S, :GI, NOW(), :CT, :CA)");
+                $dbh->bindParam(':CI', $customer->id);
+                $dbh->bindParam(':FN', $firstname);
+                $dbh->bindParam(':LN', $lastname);
+                $dbh->bindParam(':P', $phone);
+                $dbh->bindParam(':E', $email);
+                $dbh->bindParam(':EP', $Encrypted_Password);
+                $dbh->bindParam(':S', $Salt);
+                $dbh->bindParam(':GI', $gcm_id);
+                $dbh->bindParam(':CT', $user_type);
+                $dbh->bindParam(':CA', $client_actv);
+                $dbh->execute();
 
-            $app->response->headers->set("Content-type", "application/json");
-            $app->response->status(400);
-            $app->response->body(json_encode($response));
+                if ($dbh) {
+                    $connection = null;
+                    $response['Message'] = "Registrado Correctamente";
+                    $response['IsError'] = false;
+                    $response['Data'] = null;
+
+                    $app->response->headers->set("Content-type", "application/json");
+                    $app->response->status(400);
+                    $app->response->body(json_encode($response));
+                }
+            }
+            else{
+               $connection = null;
+
+                $response['Message'] = "El correo no existe";
+                $response['IsError'] = false;
+                $response['Data'] = null;
+
+                $app->response->headers->set("Content-type", "application/json");
+                $app->response->status(400);
+                $app->response->body(json_encode($response)); 
+            }
+            
         }
 
     }catch(PDOException $e){

@@ -63,23 +63,24 @@ $app->post("/setCard/", function() use($app){
 
 
 
-$app->get("/getFavoritePlace/:id", function($id) use($app){
+$app->get("/getCard/:id", function($id) use($app){
 
     try{
 
         $connection = getConnection();
-        $dbh = $connection->prepare("SELECT Name, Description, Latitude, Longitude FROM Place_Favorite WHERE Client_Id = :CID");
+        $dbh = $connection->prepare("SELECT Conekta_Id FROM Client WHERE Client_Id = :CID");
         $dbh->bindParam(':CID', $id);
         $dbh->execute();
-
-        $favoriteplace = $dbh->fetchObject();
+        $result = $dbh->fetchObject();
         
-        if ($favoriteplace != false) {
+        if ($result != false) {
+
+            $customer = Conekta_Customer::find($result->Conekta_Id);
 
             $connection = null;
             $response['Message'] = "OK";
             $response['IsError'] = false;
-            $response['Data'] = $favoriteplace;
+            $response['Data'] = $customer->cards;
 
             $app->response->headers->set("Content-type", "application/json");
             $app->response->status(200);
@@ -88,7 +89,7 @@ $app->get("/getFavoritePlace/:id", function($id) use($app){
         else {
             $connection = null;
 
-            $response['Message'] = "No hay favoritos..";
+            $response['Message'] = "El usuario no existe";
             $response['IsError'] = false;
             $response['Data'] = null;
 
@@ -112,25 +113,26 @@ $app->get("/getFavoritePlace/:id", function($id) use($app){
 });
 
 
-
-
-
-$app->delete("/Delete_FavoritePlace/:id", function($id) use($app){
+$app->delete("/deleteCard/:id", function($id) use($app){
 
 
     $json = $app->request->getBody();
     $data = json_decode($json, true);
 
-    $Client_Id = $data['Client_Id'];
+    $tokenCard = $data['TokenCard'];
+    $position = $data['CardPosition'];
     $response = array();
 
     try{
 
         $connection = getConnection();
-        $dbh = $connection->prepare("DELETE FROM Place_Favorite WHERE (Client_Id = :CID) AND (Place_Favorite_Id = :PFID)");
-        $dbh->bindParam(':CID', $Client_Id);
-        $dbh->bindParam(':PFID', $id);
+        $dbh = $connection->prepare("DELETE FROM Card WHERE (Client_Id = :CID) AND (Conekta_Card = :CC)");
+        $dbh->bindParam(':CID', $id);
+        $dbh->bindParam(':CC', $tokenCard);
         $dbh->execute();
+
+        $customer = Conekta_Customer::find("cus_k2D9DxlqdVTagmEd400001");
+        $card = $customer->cards[$position]->delete();
 
         if ($dbh == true) {
             $connection = null;
