@@ -13,6 +13,10 @@ require 'app/libs/connect.php';
 require 'app/routes/User/Account.php';
 require 'app/routes/User/FavoritePlace.php';
 
+require 'app/routes/Cabbie/Account.php';
+
+require 'app/routes/Functions.php';
+
 require_once ("app/libs/Conekta.php");
 Conekta::setApiKey("key_tQCYUfka2gsxiisnXCXpbQ");
 
