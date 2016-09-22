@@ -35,8 +35,8 @@
 <div id="wrapper">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" 
-        ng-hide="authenticated == false" >
+        <nav class="navbar navbar-inverse navbar-fixed-top nav-color-n" role="navigation" 
+         >
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -50,7 +50,7 @@
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope icono-nav-bar"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu message-dropdown">
                         <li class="message-preview">
                             <a href="#">
@@ -103,7 +103,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell icono-nav-bar"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
                         <li>
                             <a href="">Alert Name <span class="label label-default">Alert Badge</span></a>
@@ -130,7 +130,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{name}} <b class="caret"></b></a>
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user icono-nav-bar"></i> {{name}} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Perfil</a>
@@ -149,25 +149,22 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="#/dashboard"><i class="fa fa-fw fa-dashboard"></i> Principal</a>
+                        <a href="#/dashboard"><i class="fa fa-fw fa-dashboard icono-nav-bar"></i> Principal</a>
                     </li>
                     
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#requests">
-                        <i class="fa fa-fw fa-taxi"></i> Solicitudes <i class="fa fa-fw fa-caret-down"></i></a>
+                        <i class="fa fa-fw fa-check icono-nav-bar"></i> Solicitudes <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="requests" class="collapse">
                             <li>
-                                <a href="#/cabbie">Ver Todos</a>
-                            </li>
-                            <li>
-                                <a href="#/database_createDatabase">Agregar</a>
+                                <a href="#/ver-solicitudes">Ver Todos</a>
                             </li>
                         </ul>
                     </li>
 
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#realtime">
-                        <i class="fa fa-fw fa-bars"></i> Real Time <i class="fa fa-fw fa-caret-down"></i></a>
+                        <i class="fa fa-fw fa-clock-o icono-nav-bar"></i> Real Time <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="realtime" class="collapse">
                             <li>
                                 <a href="#/realTime">Real Time</a>
@@ -177,25 +174,46 @@
 
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#cabbie">
-                        <i class="fa fa-fw fa-taxi"></i> Taxistas <i class="fa fa-fw fa-caret-down"></i></a>
+                        <i class="fa fa-fw fa-taxi icono-nav-bar"></i> Taxistas <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="cabbie" class="collapse">
                             <li>
                                 <a href="#/cabbie">Ver Todos</a>
                             </li>
                             <li>
-                                <a href="#/database_createDatabase">Agregar</a>
+                                <a href="#/add-cabbie">Agregar</a>
+                            </li>
+                        </ul>
+                    </li>
+                                        
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#usuarios">
+                        <i class="fa fa-fw fa-user icono-nav-bar"></i> Usuarios <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="usuarios" class="collapse">
+                            <li>
+                                <a href="#/usuarios">Ver Todos</a>
+                            </li>
+                            <li>
+                                <a href="#/registro-usuarios">Agregar</a>
                             </li>
                         </ul>
                     </li>
 
                     <li>
-                        <a href="#/"><i class="fa fa-fw fa-edit"></i> Usuarios</a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#reservaciones">
+                        <i class="fa fa-fw fa-calendar icono-nav-bar"></i> Reservaciones <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="reservaciones" class="collapse">
+                            <li>
+                                <a href="#/reservaciones">Ver Todos</a>
+                            </li>
+                            <li>
+                                <a href="#/add-reservacion">Agregar</a>
+                            </li>
+                        </ul>
                     </li>
+
+
                     <li>
-                        <a href="#/"><i class="fa fa-fw fa-desktop"></i> Reservaciones</a>
-                    </li>
-                    <li>
-                        <a href="#/"><i class="fa fa-fw fa-wrench"></i> Mensajes</a>
+                        <a href="#/mensajes"><i class="fa fa-fw fa-envelope-o icono-nav-bar"></i> Mensajes</a>
                     </li>
                     
                 </ul>

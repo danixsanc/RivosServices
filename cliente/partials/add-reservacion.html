@@ -1,0 +1,52 @@
+<h2 class="col-l-12 ">Agregar Reservacion</h2>
+
+<div class="col-xs-8 col-xs-offset-2">
+        <div class="well well-sm">
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" class="form-control" placeholder="Ingrese su nombre" ng-model="reservation.Name" />
+            </div>
+
+            <div class="form-group">
+                <label>Apellido</label>
+                <input type="text" class="form-control" placeholder="Ingrese su apellido" ng-model="reservation.Lastname" />
+            </div>
+
+            <div class="form-group">
+                <label>Telefono</label>
+                <input type="text" class="form-control" placeholder="Ingrese su numero de telefono" ng-model="reservation.Phone" />
+            </div>
+
+            <div class="form-group">
+                <label>Tipo de Auto</label>
+                <select class="form-control" ng-model="reservation.Cartype">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="2">3</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Numero de Unidad Asignada</label>
+                <input type="text" class="form-control" placeholder="Ingrese la unidad asignada"ng-model="reservation.Unitynumber"/>
+            </div>
+
+            <div class="form-group">
+                <label>Numero de servicio</label>
+                <input type="text" class="form-control" placeholder="Ingrese su Numero de servicio"ng-model="reservation.Servicenumber" />
+            </div>
+
+            <div class="form-group">
+                <label>Ubicacion del cliente</label>
+                <input type="text" class="form-control" placeholder="Ingrese Ubicacion del cliente" ng-model="reservation.ClientUbication" />
+            </div>
+
+            <div class="form-group">
+                <label>Destino</label>
+                <input type="text" class="form-control" placeholder="Ingrese su Destino" ng-model="reservation.Destiny" />
+            </div>
+
+            <button type="button" class="btn btn-danger">Cancelar</button>
+            <button type="button" class="btn btn-success">Agregar</button>
+        </div>
+    </div>         

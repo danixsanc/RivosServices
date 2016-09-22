@@ -1,0 +1,77 @@
+<h2 class="col-l-12 ">Agregar Taxista</h2>
+
+<div class="col-xs-8 col-xs-offset-2">
+        <div class="well well-sm">
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" class="form-control" placeholder="Ingrese su nombre" ng-model="cabbie.Name"/>
+            </div>
+
+            <div class="form-group">
+                <label>Apellido</label>
+                <input type="text" class="form-control" placeholder="Ingrese su apellido" ng-model="cabbie.Lastname"/>
+            </div>
+
+            <div class="form-group">
+                <label>Correo</label>
+                <input type="text" class="form-control" placeholder="Ingrese su correo electrónico" ng-model="cabbie.Email" />
+            </div>
+
+            <div class="form-group">
+                <label>Telefono</label>
+                <input type="text" class="form-control" placeholder="Ingrese su numero de telefono" ng-model="cabbie.Phone" />
+            </div>
+
+            <div class="form-group">
+                <label>Sexo</label>
+                <select class="form-control" ng-model="cabbie.Sex">
+                    <option value="1">Masculino</option>
+                    <option value="2">Femenino</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Tipo de Auto</label>
+                <select class="form-control" ng-model="cabbie.Cartype">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="2">3</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Fecha de nacimiento</label>
+                <input type="date" class="form-control datepicker" placeholder="Ingrese su fecha de nacimiento" ng-model="cabbie.date" />
+            </div>
+
+            <div class="form-group">
+                <label>Numero de Unidad</label>
+                <input type="text" class="form-control" placeholder="Ingrese su apellido" ng-model="cabbie.Number" />
+            </div>
+
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input type="password" class="form-control" placeholder="Ingrese su Contraseña" ng-model="cabbie.password" />
+            </div>
+
+            <div class="form-group">
+                <label>Repetir Contraseña</label>
+                <input type="password" class="form-control" placeholder="Ingrese su Contraseña" ng-model="cabbie.password" />
+            </div>
+            <div class="form-group">
+                <label>Numero de contrato</label>
+                <input type="text" class="form-control" placeholder="Ingrese su Numero de contrato" ng-model="cabbie.Contract" />
+            </div>
+
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label>Foto</label>
+                        <input type="file" placeholder="Ingrese una imagen" ng-model="cabbie.Photo"/>
+                    </div>     
+                </div>
+            </div>
+            <button type="button" class="btn btn-danger">Cancelar</button>
+            <button type="button" class="btn btn-success">Agregar</button>
+        </div>
+    </div>         

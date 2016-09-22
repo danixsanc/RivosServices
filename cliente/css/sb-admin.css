@@ -43,7 +43,12 @@ body {
 }
 
 /* Top Navigation */
-
+.icono-nav-bar{
+    color:#fff;
+}
+.nav-color-n{
+    background-color: #0c3667;
+}
 .top-nav {
     padding: 0 15px;
 }
@@ -122,7 +127,7 @@ ul.alert-dropdown {
         border: none;
         border-radius: 0;
         overflow-y: auto;
-        background-color: #222;
+        background-color: #082343;
         bottom: 0;
         overflow-x: hidden;
         padding-bottom: 40px;

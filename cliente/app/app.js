@@ -37,8 +37,44 @@ app.config([
                 templateUrl: 'partials/realTime.html',
                 controller: 'realTimeCtrl'
             })
+            .when('/add-cabbie', {
+                title: 'Real Time',
+                templateUrl: 'partials/add-cabbie.html',
+                controller: 'realTimeCtrl'
+            })
+            .when('/ver-solicitudes', {
+                title: 'Real Time',
+                templateUrl: 'partials/ver-solicitudes.html',
+                controller: 'realTimeCtrl'
+            })
 
 
+
+            .when('/add-reservacion', {
+                title: 'Real Time',
+                templateUrl: 'partials/add-reservacion.html',
+                controller: 'realTimeCtrl'
+            })
+            .when('/registro-usuarios', {
+                title: 'Real Time',
+                templateUrl: 'partials/registro-usuarios.html',
+                controller: 'realTimeCtrl'
+            })
+            .when('/reservaciones', {
+                title: 'Real Time',
+                templateUrl: 'partials/reservaciones.html',
+                controller: 'realTimeCtrl'
+            })
+            .when('/usuarios', {
+                title: 'Real Time',
+                templateUrl: 'partials/usuarios.html',
+                controller: 'realTimeCtrl'
+            })
+            .when('/mensajes', {
+                title: 'Real Time',
+                templateUrl: 'partials/mensajes.html',
+                controller: 'realTimeCtrl'
+            })
 
 
             .otherwise({
@@ -58,7 +94,7 @@ app.config([
 
 
 
-    .run(function ($rootScope, $location, Data) {
+    /*.run(function ($rootScope, $location, Data) {
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
             $rootScope.authenticated = false;
             Data.get('session').then(function (results) {
@@ -77,7 +113,7 @@ app.config([
                 }
             });
         });
-    });
+    });*/
 
 
     
