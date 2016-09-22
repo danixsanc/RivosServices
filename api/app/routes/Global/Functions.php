@@ -1,12 +1,12 @@
 <?php
 if (!defined('SPECIALCONSTANT')) die ("Acceso Denegado");
 
-function get_cabbie_data($user){
+function get_cabbie_data($cabbie){
     $dataResp = array();
-    $dataResp['Cabbie_Id'] = $user->Cabbie_Id;
-    $dataResp['Name'] = $user->FirstName . ' ' . $user->LastName;
-    $dataResp['Email'] = $user->Email;
-    $dataResp['Phone'] = $user->Phone;
+    $dataResp['Cabbie_Id'] = $cabbie->Cabbie_Id;
+    $dataResp['Name'] = $cabbie->FirstName . ' ' . $cabbie->LastName;
+    $dataResp['Email'] = $cabbie->Email;
+    $dataResp['Phone'] = $cabbie->Phone;
     return $dataResp;
 }
 

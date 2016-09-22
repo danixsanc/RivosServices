@@ -17,20 +17,20 @@ $app->post("/cabbieLogin/", function() use($app){
         $dbh = $connection->prepare("SELECT Cabbie_Id, FirstName, LastName, Email, Phone, Password, Salt FROM Cabbie WHERE Email = :E");
         $dbh->bindParam(':E', $email);
         $dbh->execute();
-        $user = $dbh->fetchObject();
+        $cabbie = $dbh->fetchObject();
         
-        if ($user != false) {
+        if ($cabbie != false) {
 
-            $chk = verify_encrypt_Password($password, $user->Password, $user->Salt);
+            $chk = verify_encrypt_Password($password, $cabbie->Password, $cabbie->Salt);
             if ($chk) {
 
                 $connection = null;
 
-                $userData = get_cabbie_data($user);
+                $cabbieData = get_cabbie_data($cabbie);
 
                 $response['Message'] = "OK";
                 $response['IsError'] = false;
-                $response['UserData'] = $userData;
+                $response['Data'] = $cabbieData;
 
                 $app->response->headers->set("Content-type", "application/json");
                 $app->response->status(200);
@@ -40,7 +40,7 @@ $app->post("/cabbieLogin/", function() use($app){
                 $connection = null;
 
                 $response['Message'] = "Contraseña Incorrecta";
-                $response['IsError'] = false;
+                $response['IsError'] = true;
                 $response['Data'] = null;
 
                 $app->response->headers->set("Content-type", "application/json");
@@ -52,7 +52,7 @@ $app->post("/cabbieLogin/", function() use($app){
             $connection = null;
 
             $response['Message'] = "El correo no existe";
-            $response['IsError'] = false;
+            $response['IsError'] = true;
             $response['Data'] = null;
 
             $app->response->headers->set("Content-type", "application/json");
