@@ -187,7 +187,7 @@
                                         
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#usuarios">
-                        <i class="fa fa-fw fa-user icono-nav-bar"></i> Usuarios <i class="fa fa-fw fa-caret-down"></i></a>
+                        <i class="fa fa-fw fa-user icono-nav-bar"></i> Administradores <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="usuarios" class="collapse">
                             <li>
                                 <a href="#/usuarios">Ver Todos</a>
