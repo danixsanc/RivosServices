@@ -159,6 +159,22 @@
                             <li>
                                 <a href="#/ver-solicitudes">Ver Todos</a>
                             </li>
+                            <li>
+                                <a href="#/add-solicitudes">Agregar</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#carmovil">
+                        <i class="fa fa-fw fa-car icono-nav-bar"></i> Automoviles <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="carmovil" class="collapse">
+                            <li>
+                                <a href="#/automoviles">Ver Todos</a>
+                            </li>
+                            <li>
+                                <a href="#/add-automovil">Agregar</a>
+                            </li>
                         </ul>
                     </li>
 

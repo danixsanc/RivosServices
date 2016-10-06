@@ -75,6 +75,47 @@ app.config([
                 templateUrl: 'partials/mensajes.html',
                 controller: 'realTimeCtrl'
             })
+            .when('/view-cabbie', {
+                title: 'Real Time',
+                templateUrl: 'partials/view-cabbie.html',
+                controller: 'realTimeCtrl'
+            })
+            .when('/view-usuarios', {
+                title: 'Real Time',
+                templateUrl: 'partials/view-usuarios.html',
+                controller: 'realTimeCtrl'
+            })
+            .when('/view-reservaciones', {
+                title: 'Real Time',
+                templateUrl: 'partials/view-reservaciones.html',
+                controller: 'realTimeCtrl'
+            })
+            .when('/add-solicitudes', {
+                title: 'Real Time',
+                templateUrl: 'partials/add-solicitudes.html',
+                controller: 'realTimeCtrl'
+            })
+            .when('/view-solicitudes', {
+                title: 'Real Time',
+                templateUrl: 'partials/view-solicitudes.html',
+                controller: 'realTimeCtrl'
+            })
+
+            .when('/automoviles', {
+                title: 'Real Time',
+                templateUrl: 'partials/automoviles.html',
+                controller: 'realTimeCtrl'
+            })
+            .when('/view-automoviles', {
+                title: 'Real Time',
+                templateUrl: 'partials/view-automoviles.html',
+                controller: 'realTimeCtrl'
+            })
+            .when('/add-automovil', {
+                title: 'Real Time',
+                templateUrl: 'partials/add-automovil.html',
+                controller: 'realTimeCtrl'
+            })
 
 
             .otherwise({
