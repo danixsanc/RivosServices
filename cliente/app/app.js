@@ -116,6 +116,11 @@ app.config([
                 templateUrl: 'partials/add-automovil.html',
                 controller: 'realTimeCtrl'
             })
+            .when('/view-mensajes', {
+                title: 'Real Time',
+                templateUrl: 'partials/view-mensajes.html',
+                controller: 'realTimeCtrl'
+            })
 
 
             .otherwise({
