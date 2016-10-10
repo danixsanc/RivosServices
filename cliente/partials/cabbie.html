@@ -24,11 +24,24 @@
                         <th>Email</th>
                         <th>Contrato</th>
                         <th>Acciones</th>
-                        <th>Foto</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="cabbie in listaCabbies | filter : search" 
+                <tr>
+                    <td>asdasdasd</td>
+                        <td>asdasd</td>
+                        <td>{{cabbie.Phone}}</td>
+                        <td>{{cabbie.Email}}</td>
+                        <td>{{cabbie.Contract}}</td>
+                        <td>{{cabbie.photo}}</td>
+                        <td>
+                        <a href="#/view-cabbie"><i class="fa fa-search"></i></a>
+                        <button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                        <a href="#/view-cabbie"><i class="fa fa-pencil"></i></a>
+                        </td>
+                </tr>
+                    <!--tr ng-repeat="cabbie in listaCabbies | filter : search" 
                     ng-class="{'warning' : {{cabbie.actv}} == 500}">
                         <td>{{cabbie.Cabbie_Id}}</td>
                         <td>{{cabbie.Name}}</td>
@@ -40,7 +53,7 @@
                             <button class="btn btn-info"><i class="fa fa-search" aria-hidden="true"></i></button>
                             <button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                         </td>
-                    </tr>
+                    </tr-->
                 
                 </tbody>
             </table>

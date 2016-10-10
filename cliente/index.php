@@ -159,6 +159,22 @@
                             <li>
                                 <a href="#/ver-solicitudes">Ver Todos</a>
                             </li>
+                            <li>
+                                <a href="#/add-solicitudes">Agregar</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#carmovil">
+                        <i class="fa fa-fw fa-car icono-nav-bar"></i> Automoviles <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="carmovil" class="collapse">
+                            <li>
+                                <a href="#/automoviles">Ver Todos</a>
+                            </li>
+                            <li>
+                                <a href="#/add-automovil">Agregar</a>
+                            </li>
                         </ul>
                     </li>
 
@@ -187,7 +203,7 @@
                                         
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#usuarios">
-                        <i class="fa fa-fw fa-user icono-nav-bar"></i> Usuarios <i class="fa fa-fw fa-caret-down"></i></a>
+                        <i class="fa fa-fw fa-user icono-nav-bar"></i> Administradores <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="usuarios" class="collapse">
                             <li>
                                 <a href="#/usuarios">Ver Todos</a>
