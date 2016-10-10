@@ -75,12 +75,11 @@ app.config([
                 templateUrl: 'partials/mensajes.html',
                 controller: 'realTimeCtrl'
             })
-<<<<<<< HEAD
             .when('/socket', {
                 title: 'Socket',
                 templateUrl: 'partials/socket.html',
                 controller: 'socketCtrl'
-=======
+            })
             .when('/view-cabbie', {
                 title: 'Real Time',
                 templateUrl: 'partials/view-cabbie.html',
@@ -126,7 +125,6 @@ app.config([
                 title: 'Real Time',
                 templateUrl: 'partials/view-mensajes.html',
                 controller: 'realTimeCtrl'
->>>>>>> origin/master
             })
 
 
@@ -147,7 +145,7 @@ app.config([
 
 
 
-    /*.run(function ($rootScope, $location, Data) {
+    .run(function ($rootScope, $location, Data) {
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
             $rootScope.authenticated = false;
             Data.get('session').then(function (results) {
@@ -166,7 +164,7 @@ app.config([
                 }
             });
         });
-    });*/
+    });
 
 
     
