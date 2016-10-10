@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'toaster', 'uiGmapgoogle-maps']);
+var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'uiGmapgoogle-maps']);
 
 app.config([
     '$routeProvider', 
@@ -74,6 +74,11 @@ app.config([
                 title: 'Real Time',
                 templateUrl: 'partials/mensajes.html',
                 controller: 'realTimeCtrl'
+            })
+            .when('/socket', {
+                title: 'Socket',
+                templateUrl: 'partials/socket.html',
+                controller: 'socketCtrl'
             })
 
 

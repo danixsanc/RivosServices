@@ -24,11 +24,10 @@ $app->post("/acceptRequest/", function() use($app){
 
             $connection = null;
 
-            $userData = get_cabbie_data($user);
-
+        
             $response['Message'] = "OK";
             $response['IsError'] = false;
-            $response['UserData'] = $userData;
+            $response['UserData'] = null;
 
             $app->response->headers->set("Content-type", "application/json");
             $app->response->status(200);
@@ -61,18 +60,20 @@ $app->post("/getRequests/", function() use($app){
     try{
 
         $connection = getConnection();
-        $dbh = $connection->prepare("SELECT * FROM Request INNER JOIN Client ON  Request.Client_Id = Client.Client_Id
-        WHERE Cabbie_Id = ':CAI' AND Request.Status = ':V'");
+
+        $dbh = $connection->prepare("SELECT R.Request_Id, R.Date, R.Latitude_In, R.Longitude_In, R.Latitude_Fn, R.Longitude_Fn, R.Cabbie_Id, R.Client_Id, C.Gcm_Id FROM Request R 
+            INNER JOIN Client C ON  R.Client_Id = C.Client_Id
+        WHERE Cabbie_Id = :CAI AND R.RequestStatus_Id = :V");
+
+
         $dbh->bindParam(':CAI', $cabbie_id);
         $dbh->bindParam(':V', $process);
         $dbh->execute();
-        $req = $dbh->fetchObject();
+        $req = $dbh->fetchAll(PDO::FETCH_ASSOC);
 
         if ($req != false) {
 
             $connection = null;
-
-            $userData = get_cabbie_data($user);
 
             $response['Message'] = "OK";
             $response['IsError'] = false;
@@ -118,8 +119,6 @@ $app->post("/getRequestById/", function() use($app){
 
             $connection = null;
 
-            $userData = get_cabbie_data($user);
-
             $response['Message'] = "OK";
             $response['IsError'] = false;
             $response['Data'] = $req;
@@ -131,7 +130,7 @@ $app->post("/getRequestById/", function() use($app){
         else {
             $connection = null;
 
-            $response['Message'] = "Error al obtener datos";
+            $response['Message'] = "La solicitud no existe";
             $response['IsError'] = false;
             $response['Data'] = null;
 
@@ -174,16 +173,15 @@ $app->post("/finalizeRequest/", function() use($app){
 
             if ($dbh2) {
                 $connection = null;
-                $userData = get_cabbie_data($user);
 
                 $response['Message'] = "OK";
                 $response['IsError'] = false;
-                $response['UserData'] = $userData;
+                $response['UserData'] = null;
 
                 $app->response->headers->set("Content-type", "application/json");
                 $app->response->status(200);
                 $app->response->body(json_encode($response));
-            }
+            }f
             else {
                 $connection = null;
 

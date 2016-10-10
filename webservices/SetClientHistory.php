@@ -13,9 +13,6 @@
     $Destino = $data->Destino;
     $Inicio = $data->Inicio;
     $Tipo = $data->Tipo;
-
-
-
             
     require_once '../include/DB_Connect.php';
         $db = new DB_Connect();

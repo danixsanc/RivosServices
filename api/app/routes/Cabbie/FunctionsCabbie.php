@@ -65,8 +65,6 @@ $app->post("/checkReference/", function() use($app){
 
             $connection = null;
 
-            $userData = get_cabbie_data($user);
-
             $response['Message'] = "OK";
             $response['IsError'] = false;
             $response['Data'] = $Ref;
@@ -78,7 +76,7 @@ $app->post("/checkReference/", function() use($app){
         else {
             $connection = null;
 
-            $response['Message'] = "Error al obtener datos";
+            $response['Message'] = "La referencia no existe";
             $response['IsError'] = false;
             $response['Data'] = null;
 

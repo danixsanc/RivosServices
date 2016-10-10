@@ -251,6 +251,7 @@
   <script src="app/dashboardCtrl.js"></script>
   <script src="app/cabbieCtrl.js"></script>
   <script src="app/realTimeCtrl.js"></script>
+  <script src="app/socketCtrl.js"></script>
   <!--Controllers-->
 
   <script src="js/jquery.js"></script>

@@ -1,8 +1,8 @@
-app.factory("Data", ['$http', 'toaster',
-    function ($http, toaster) { // This service connects to our REST API
+app.factory("Data", ['$http',
+    function ($http) { // This service connects to our REST API
 
         //var serviceBase = 'api/v1/';
-        var serviceBase = 'http://localhost/RivosServices/api/';
+        var serviceBase = 'http://sistema.rivosservices.com/test/';
 
         var obj = {};
         obj.toast = function (data) {
