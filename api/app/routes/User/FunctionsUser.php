@@ -212,48 +212,133 @@ $app->post("/setRequest/", function() use($app){
 
     try{
 
-        $var = 1;
-        $connection = getConnection();
-        $dbh = $connection->prepare("INSERT INTO Request (Date, Latitude_In, Longitude_In, Latitude_Fn, Longitude_Fn, Inicio, Destino, Ref, Price, Client_Id, Cabbie_Id, PaymentType_Id, RequestStatus_Id) 
-        VALUES( NOW(), :LAI, :LOI, :LAF, :LOF, :INI, :DES, :REF, :PR, :CLID, :CID, :PT, :RSI)");
-        $dbh->bindParam(':LAI', $latitude_In);
-        $dbh->bindParam(':LOI', $longitude_In);
-        $dbh->bindParam(':LAF', $latitude_Fn);
-        $dbh->bindParam(':LOF', $longitude_Fn);
-        $dbh->bindParam(':INI', $inicio);
-        $dbh->bindParam(':DES', $destino);
-        $dbh->bindParam(':REF', $Ref);
-        $dbh->bindParam(':PR', $precio);
-        $dbh->bindParam(':CLID', $client_Id);
-        $dbh->bindParam(':CID', $cabbie_Id);
-        $dbh->bindParam(':PT', $paymentType_Id);
-        $dbh->bindParam(':RSI', $var);
-        $dbh->execute();
+        if ($paymentType_Id == 1) {
 
-        $lastId = $connection->lastInsertId();
-
-        if($dbh){
-
-            $dbh = $connection->prepare("UPDATE Cabbie SET Cabbie_Status_Id = 2 WHERE Cabbie_Id = :CID");
-            $dbh->bindParam(':CID', $cabbie_Id);
+            $var = 1;
+            $connection = getConnection();
+            $dbh = $connection->prepare("SELECT C.Conekta_Card, CL.FirstName, CL.LastName, CL.Phone, CL.Email
+                FROM Card C 
+                INNER JOIN Client CL ON C.Client_Id = CL.Client_Id
+                WHERE C.Client_Id = :CID");
+            $dbh->bindParam(':CID', $client_Id);
             $dbh->execute();
-            if ($dbh) {
+            $req = $dbh->fetchObject();
 
-                $dbh = $connection->prepare("SELECT Ref, Date FROM Request WHERE Request_Id = :RID");
-                $dbh->bindParam(':RID', $lastId);
+
+
+            $charge = Conekta_Charge::create(array(
+              'description'=> 'Rivos Services',
+              'reference_id'=> $Ref,
+              'amount'=> $precio * 100,
+              'currency'=>'MXN',
+              'card'=> $req->Conekta_Card,
+              'details'=> array(
+                'name'=> $req->FirstName + ' ' + $req->LastName,
+                'phone'=> $req->Phone,
+                'email'=> $req->Email,
+                'line_items'=> array(
+                  array(
+                    'name'=> 'Rivos Services',
+                    'description'=> 'Servicio de taxi',
+                    'unit_price'=> $precio * 100,
+                    'quantity'=> 1,
+                    'sku'=> $Ref,
+                    'category'=> 'Services'
+                  )
+                )
+              )
+            ));
+
+
+            $dbh = $connection->prepare("INSERT INTO Request (Date, Latitude_In, Longitude_In, Latitude_Fn, Longitude_Fn, Inicio, Destino, Ref, Price, Client_Id, Cabbie_Id, PaymentType_Id, RequestStatus_Id,
+                Pay_uid) 
+            VALUES( NOW(), :LAI, :LOI, :LAF, :LOF, :INI, :DES, :REF, :PR, :CLID, :CID, :PT, :RSI, :PUID)");
+            $dbh->bindParam(':LAI', $latitude_In);
+            $dbh->bindParam(':LOI', $longitude_In);
+            $dbh->bindParam(':LAF', $latitude_Fn);
+            $dbh->bindParam(':LOF', $longitude_Fn);
+            $dbh->bindParam(':INI', $inicio);
+            $dbh->bindParam(':DES', $destino);
+            $dbh->bindParam(':REF', $Ref);
+            $dbh->bindParam(':PR', $precio);
+            $dbh->bindParam(':CLID', $client_Id);
+            $dbh->bindParam(':CID', $cabbie_Id);
+            $dbh->bindParam(':PT', $paymentType_Id);
+            $dbh->bindParam(':RSI', $var);
+            $dbh->bindParam(':PUID', $charge->id);
+            $dbh->execute();
+
+            $lastId = $connection->lastInsertId();
+
+            if($dbh){
+
+                $dbh = $connection->prepare("UPDATE Cabbie SET Cabbie_Status_Id = 2 WHERE Cabbie_Id = :CID");
+                $dbh->bindParam(':CID', $cabbie_Id);
                 $dbh->execute();
-                $req = $dbh->fetchObject();
+                if ($dbh) {
 
-                $response['Message'] = "Actualizado";
-                $response['IsError'] = false;
-                $response['Data'] = $req;
+                    $dbh = $connection->prepare("SELECT Ref, Date FROM Request WHERE Request_Id = :RID");
+                    $dbh->bindParam(':RID', $lastId);
+                    $dbh->execute();
+                    $req = $dbh->fetchObject();
 
-                $app->response->headers->set("Content-type", "application/json");
-                $app->response->status(200);
-                $app->response->body(json_encode($response));
+                    $response['Message'] = "Actualizado";
+                    $response['IsError'] = false;
+                    $response['Data'] = $req;
+
+                    $app->response->headers->set("Content-type", "application/json");
+                    $app->response->status(200);
+                    $app->response->body(json_encode($response));
+                }
+
             }
-
         }
+        else if ($paymentType_Id == 2) {
+            $var = 1;
+            $connection = getConnection();
+            $dbh = $connection->prepare("INSERT INTO Request (Date, Latitude_In, Longitude_In, Latitude_Fn, Longitude_Fn, Inicio, Destino, Ref, Price, Client_Id, Cabbie_Id, PaymentType_Id, RequestStatus_Id) 
+            VALUES( NOW(), :LAI, :LOI, :LAF, :LOF, :INI, :DES, :REF, :PR, :CLID, :CID, :PT, :RSI)");
+            $dbh->bindParam(':LAI', $latitude_In);
+            $dbh->bindParam(':LOI', $longitude_In);
+            $dbh->bindParam(':LAF', $latitude_Fn);
+            $dbh->bindParam(':LOF', $longitude_Fn);
+            $dbh->bindParam(':INI', $inicio);
+            $dbh->bindParam(':DES', $destino);
+            $dbh->bindParam(':REF', $Ref);
+            $dbh->bindParam(':PR', $precio);
+            $dbh->bindParam(':CLID', $client_Id);
+            $dbh->bindParam(':CID', $cabbie_Id);
+            $dbh->bindParam(':PT', $paymentType_Id);
+            $dbh->bindParam(':RSI', $var);
+            $dbh->execute();
+
+            $lastId = $connection->lastInsertId();
+
+            if($dbh){
+
+                $dbh = $connection->prepare("UPDATE Cabbie SET Cabbie_Status_Id = 2 WHERE Cabbie_Id = :CID");
+                $dbh->bindParam(':CID', $cabbie_Id);
+                $dbh->execute();
+                if ($dbh) {
+
+                    $dbh = $connection->prepare("SELECT Ref, Date FROM Request WHERE Request_Id = :RID");
+                    $dbh->bindParam(':RID', $lastId);
+                    $dbh->execute();
+                    $req = $dbh->fetchObject();
+
+                    $response['Message'] = "Actualizado";
+                    $response['IsError'] = false;
+                    $response['Data'] = $req;
+
+                    $app->response->headers->set("Content-type", "application/json");
+                    $app->response->status(200);
+                    $app->response->body(json_encode($response));
+                }
+
+            }
+        }
+
+        
     
 
     }catch(PDOException $e){
