@@ -12,45 +12,45 @@ app.controller('cabbieCtrl', function ($scope, $rootScope, $routeParams, $locati
             } });
     };
 
-    $scope.guardarCliente = function (data){
-    	Data.post('save_cliente', {data:data}).then(function (results){
-    		$location.path('clientes');
+    $scope.saveCabbies = function (data){
+    	Data.post('save_cabbies', {data:data}).then(function (results){
+    		$location.path('cabbies');
     	});
     };
 
-    $scope.guardarClienteMod = function (data){
+    $scope.saveCabbiesMod = function (data){
         var id = $routeParams.idCliente;
-        Data.post('update_cliente/'+id, {data:data}).then(function (results){
-            $location.path('clientes');
+        Data.post('update_cabbies/'+id, {data:data}).then(function (results){
+            $location.path('cabbies');
         });
     };
 
     
-    $scope.detalleCliente = function () {
+    $scope.detailCabbies = function () {
         var id = $routeParams.idCliente;
-        Data.get('get_cliente_by_id/'+id).then(function (results) 
+        Data.get('get_cabbies_by_id/'+id).then(function (results) 
         {
             if (results.Message) {
-                $scope.cliente = results.Data[0];
+                $scope.cabbies = results.Data[0];
             } 
         });
     };
 
-    $scope.editarCliente = function () {
+    $scope.editCabbies = function () {
         $scope.checked = false;
     }
 
 
 
     
-    $scope.eliminarCliente = function(data) {
-        var deleteUser = $window.confirm('¿SEGURO QUE DESEA ELIMINAR AL CLIENTE "' + data.Name + '" ?');
+    $scope.deleteCabbies = function(data) {
+        var deleteCabbies = $window.confirm('¿SEGURO QUE DESEA ELIMINAR AL TAXISTA "' + data.Name + '" ?');
 
-        if (deleteUser) {
-            Data.get('delete_cliente/'+data.idCliente).then(function (results) 
+        if (deleteCabbies) {
+            Data.get('delete_cabbies/'+data.idCabbies).then(function (results) 
             {
                 if (results.Message) {
-                    $location.path('clientes');
+                    $location.path('cabbies');
                 } 
             });
         }
