@@ -205,6 +205,7 @@ $app->post("/setRequest/", function() use($app){
     $precio = $data['Precio'];
     $client_Id = $data['Client_Id'];
     $cabbie_Id = $data['Cabbie_Id'];
+    $card_Id = $data['Card_Id'];
     $paymentType_Id = $data['PaymentType_Id'];
  
 
@@ -216,10 +217,9 @@ $app->post("/setRequest/", function() use($app){
 
             $var = 1;
             $connection = getConnection();
-            $dbh = $connection->prepare("SELECT C.Conekta_Card, CL.FirstName, CL.LastName, CL.Phone, CL.Email
-                FROM Card C 
-                INNER JOIN Client CL ON C.Client_Id = CL.Client_Id
-                WHERE C.Client_Id = :CID");
+            $dbh = $connection->prepare("SELECT FirstName, LastName, Phone, Email
+                FROM Client
+                WHERE Client_Id = :CID");
             $dbh->bindParam(':CID', $client_Id);
             $dbh->execute();
             $req = $dbh->fetchObject();
@@ -231,7 +231,7 @@ $app->post("/setRequest/", function() use($app){
               'reference_id'=> $Ref,
               'amount'=> $precio * 100,
               'currency'=>'MXN',
-              'card'=> $req->Conekta_Card,
+              'card'=> $card_Id,
               'details'=> array(
                 'name'=> $req->FirstName + ' ' + $req->LastName,
                 'phone'=> $req->Phone,
