@@ -23,7 +23,7 @@
                         <th>Telefono</th>
                         <th>Correo</th>
                         <th>Compañia</th>
-                        <th></th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,9 +34,9 @@
                         <td>{{cabbie.Email}}</td>
                         <td>{{cabbie.Contract}}</td>
                         <td>
-                        <a href="#/view-usuarios"><i class="fa fa-search"></i></a>
+                        <a href="#/view-usuarios" class="btn btn-info"><i class="fa fa-search"></i></a>
                         <button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                        <a href="#/view-usuarios"><i class="fa fa-pencil"></i></a>
+                        <a href="#/view-usuarios" class="btn btn-success"><i class="fa fa-pencil"></i></a>
                         </td>
                 </tr>
                     <!--tr ng-repeat="cabbie in listaCabbies | filter : search" 

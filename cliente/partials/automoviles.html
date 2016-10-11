@@ -23,6 +23,7 @@
                         <th>Año</th>
                         <th>Placas</th>
                         <th>Numero de unidad</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,9 +34,9 @@
                         <td>{{cabbie.Email}}</td>
                         <td>{{cabbie.Contract}}</td>
                         <td>
-                        <a href="#/view-automoviles"><i class="fa fa-search"></i></a>
-                        <button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                        <a href="#/view-automoviles"><i class="fa fa-pencil"></i></a>
+                        <a href="#/view-automoviles" class="btn btn-info"><i class="fa fa-search"></i></a>
+                        <button class="btn btn-danger" ><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                        <a href="#/view-automoviles" class="btn btn-success"><i class="fa fa-pencil"></i></a>
                         </td>
                 </tr>
                     <!--tr ng-repeat="cabbie in listaCabbies | filter : search" 
