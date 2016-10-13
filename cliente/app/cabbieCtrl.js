@@ -6,7 +6,7 @@ app.controller('cabbieCtrl', function ($scope, $rootScope, $routeParams, $locati
     $scope.checked = true;
 
 	$scope.getCabbies = function () {
-        Data.get('get_cabbies').then(function (results) {
+        Data.get('get_Cabbies').then(function (results) {
             if (results.Message == "OK") {
                 $scope.listaCabbies = results.Data;
             } });
