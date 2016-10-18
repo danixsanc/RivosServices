@@ -8,7 +8,7 @@ $app->get("/get_Cabbies/", function() use($app){
     try{
 
         $connection = getConnection();
-        $dbh = $connection->prepare("SELECT * FROM Cabbies");
+        $dbh = $connection->prepare("SELECT * FROM cabbie");
         $dbh->execute();
         $cc = $dbh->fetchAll(PDO::FETCH_ASSOC);
 

@@ -181,7 +181,7 @@ $app->post("/finalizeRequest/", function() use($app){
                 $app->response->headers->set("Content-type", "application/json");
                 $app->response->status(200);
                 $app->response->body(json_encode($response));
-            }f
+            }
             else {
                 $connection = null;
 

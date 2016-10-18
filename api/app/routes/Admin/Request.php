@@ -6,10 +6,10 @@ $app->get("/get_Requests/", function() use($app){
     try{
 
         $connection = getConnection();
-        $dbh = $connection->prepare("SELECT R.Request_Id, C.FirstName
-            FROM Request R
-            INNER JOIN Cabbie C");
-        $dbh->bindParam(':CAI', $cabbie_id);
+        $dbh = $connection->prepare("SELECT RQ.Request_Id,RQ.Inicio,RQ.Destino,RQ.Date,RQ.Price,
+            RQ.PaymentType_Id,PT.Description,CONCAT(CB.FirstName, ' ', CB.LastName) AS cabbie_name FROM request RQ
+            INNER JOIN paymenttype PT ON RQ.PaymentType_Id = PT.PaymentType_Id
+            INNER JOIN cabbie CB ON RQ.Cabbie_Id = CB.Cabbie_Id");
         $dbh->execute();
         $cc = $dbh->fetchAll(PDO::FETCH_ASSOC);
 

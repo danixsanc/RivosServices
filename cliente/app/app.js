@@ -43,9 +43,9 @@ app.config([
                 controller: 'realTimeCtrl'
             })
             .when('/ver-solicitudes', {
-                title: 'Real Time',
+                title: 'Solicitudes',
                 templateUrl: 'partials/ver-solicitudes.html',
-                controller: 'realTimeCtrl'
+                controller: 'requestCtrl'
             })
 
 
@@ -61,19 +61,19 @@ app.config([
                 controller: 'realTimeCtrl'
             })
             .when('/reservaciones', {
-                title: 'Real Time',
+                title: 'Reservaciones',
                 templateUrl: 'partials/reservaciones.html',
-                controller: 'realTimeCtrl'
+                controller: 'reservationCtrl'
             })
             .when('/usuarios', {
-                title: 'Real Time',
+                title: 'Admin',
                 templateUrl: 'partials/usuarios.html',
-                controller: 'realTimeCtrl'
+                controller: 'adminCtrl'
             })
             .when('/mensajes', {
-                title: 'Real Time',
+                title: 'Mensaje Cliente',
                 templateUrl: 'partials/mensajes.html',
-                controller: 'realTimeCtrl'
+                controller: 'messageCtrl'
             })
             .when('/socket', {
                 title: 'Socket',
@@ -109,7 +109,7 @@ app.config([
             .when('/automoviles', {
                 title: 'Real Time',
                 templateUrl: 'partials/automoviles.html',
-                controller: 'realTimeCtrl'
+                controller: 'carCtrl'
             })
             .when('/view-automoviles', {
                 title: 'Real Time',
@@ -141,11 +141,11 @@ app.config([
         v: '3.20', //defaults to latest 3.X anyhow
         libraries: 'weather,geometry,visualization'
     });
-})
+});
 
 
 
-    .run(function ($rootScope, $location, Data) {
+  /*  .run(function ($rootScope, $location, Data) {
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
             $rootScope.authenticated = false;
             Data.get('session').then(function (results) {
@@ -166,5 +166,5 @@ app.config([
         });
     });
 
-
+*/
     

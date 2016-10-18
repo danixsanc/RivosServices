@@ -8,7 +8,7 @@ $app->get("/get_Admins/", function() use($app){
     try{
 
         $connection = getConnection();
-        $dbh = $connection->prepare("SELECT * FROM Admins");
+        $dbh = $connection->prepare("SELECT * FROM Admin");
         $dbh->execute();
         $cc = $dbh->fetchAll(PDO::FETCH_ASSOC);
 

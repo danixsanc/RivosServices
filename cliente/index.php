@@ -272,6 +272,7 @@
   <script src="app/carCtrl.js"></script>
   <script src="app/reservationCtrl.js"></script>
   <script src="app/requestCtrl.js"></script>
+  <script src="app/messageCtrl.js"></script>
   <!--Controllers-->
 
   <script src="js/jquery.js"></script>

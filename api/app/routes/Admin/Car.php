@@ -1,14 +1,12 @@
 <?php
 if (!defined('SPECIALCONSTANT')) die ("Acceso Denegado");
 
-
-
 $app->get("/get_Cars/", function() use($app){
 
     try{
 
         $connection = getConnection();
-        $dbh = $connection->prepare("SELECT * FROM Car");
+        $dbh = $connection->prepare("SELECT * FROM carmodel");
         $dbh->execute();
         $cc = $dbh->fetchAll(PDO::FETCH_ASSOC);
 

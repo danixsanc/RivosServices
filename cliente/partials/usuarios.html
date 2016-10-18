@@ -11,7 +11,7 @@
     </div>
 </div>
 
-<div class="row" ng-init="getCabbies()">
+<div class="row" ng-init="getAdmins()">
     <div class="col-lg-12">
         
         <div class="table-responsive">
@@ -23,36 +23,25 @@
                         <th>Telefono</th>
                         <th>Correo</th>
                         <th>Compañia</th>
+                        <th>Logotipo</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>asdasdasd</td>
-                        <td>asdasd</td>
-                        <td>{{cabbie.Phone}}</td>
-                        <td>{{cabbie.Email}}</td>
-                        <td>{{cabbie.Contract}}</td>
+                    <tr ng-repeat="admin in listAdmins | filter : search" 
+                    ng-class="{'warning' : {{cabbie.actv}} == 500}">
+                        <td>{{admin.Admin_Id}}</td>
+                        <td>{{admin.FirstName}}</td>
+                        <td>{{admin.Phone}}</td>
+                        <td>{{admin.Email}}</td>
+                        <td>{{admin.Company}}</td>
+                        <td>{{admin.image}}</td>
                         <td>
                         <a href="#/view-usuarios" class="btn btn-info"><i class="fa fa-search"></i></a>
                         <button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                         <a href="#/view-usuarios" class="btn btn-success"><i class="fa fa-pencil"></i></a>
                         </td>
-                </tr>
-                    <!--tr ng-repeat="cabbie in listaCabbies | filter : search" 
-                    ng-class="{'warning' : {{cabbie.actv}} == 500}">
-                        <td>{{cabbie.Cabbie_Id}}</td>
-                        <td>{{cabbie.Name}}</td>
-                        <td>{{cabbie.Phone}}</td>
-                        <td>{{cabbie.Email}}</td>
-                        <td>{{cabbie.Contract}}</td>
-                        <td>{{cabbie.photo}}</td>
-                        <td>
-                            <button class="btn btn-info"><i class="fa fa-search" aria-hidden="true"></i></button>
-                            <button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                        </td>
-                    </tr-->
-                
+                    </tr>
                 </tbody>
             </table>
         </div>

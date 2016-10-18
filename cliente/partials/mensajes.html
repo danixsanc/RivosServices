@@ -12,7 +12,7 @@
     </div>
 </div>
 
-<div class="row" ng-init="getCabbies()">
+<div class="row" ng-init="getMessages()">
     <div class="col-lg-12">
         
         <div class="table-responsive">
@@ -20,38 +20,26 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Emisor</th>
+                        <th>De:</th>
                         <th>Asunto</th>
                         <th>Fecha</th>
-                        <th>Estado del mensaje</th>
+                        <th>Estatus</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>asdasdasd</td>
-                        <td>asdasd</td>
-                        <td>{{cabbie.Phone}}</td>
-                        <td>{{cabbie.Email}}</td>
-                        <td>{{cabbie.Contract}}</td>
+                    <tr ng-repeat="message_client in listMessages | filter : search" 
+                    ng-class="{'warning' : {{cabbie.actv}} == 500}">
+                        <td>{{message_client.Message_Client_Id}}</td>
+                        <td>{{message_client.Sender_Client}}</td>
+                        <td>{{message_client.Subject}}</td>
+                        <td>{{message_client.Date}}</td>
+                        <td>{{message_client.Status}}</td>    
                         <td>
                         <a href="#/view-mensajes" class="btn btn-info"><i class="fa fa-search"></i></a>
                         <button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                         </td>
-                </tr>
-                    <!--tr ng-repeat="cabbie in listaCabbies | filter : search" 
-                    ng-class="{'warning' : {{cabbie.actv}} == 500}">
-                        <td>{{cabbie.Cabbie_Id}}</td>
-                        <td>{{cabbie.Name}}</td>
-                        <td>{{cabbie.Phone}}</td>
-                        <td>{{cabbie.Email}}</td>
-                        <td>{{cabbie.Contract}}</td>
-                        <td>{{cabbie.photo}}</td>
-                        <td>
-                            <button class="btn btn-info"><i class="fa fa-search" aria-hidden="true"></i></button>
-                            <button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                        </td>
-                    </tr-->
+                    </tr>
                 
                 </tbody>
             </table>
