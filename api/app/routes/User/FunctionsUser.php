@@ -74,10 +74,14 @@ $app->post("/GetPrice/", function() use($app){
 
         $connection = getConnection();
         $dbh = $connection->prepare("SELECT LC.Latitude, LC.Longitude, C.FirstName, C.Gcm_Id,
-            C.PaymentSystem_Id, C.Cabbie_Id, CONCAT(C.FirstName, ' ', C.LastName) AS Name
+            C.PaymentSystem_Id, C.Cabbie_Id, CONCAT(C.FirstName, ' ', C.LastName) AS Name,
+            CB.Brand, CM.Model, CM.Passengers, CD.Image
             FROM Location_Cabbie LC
             INNER JOIN Cabbie C ON LC.Cabbie_Id = C.Cabbie_Id 
             INNER JOIN Cabbie_Status CS ON CS.Cabbie_Status_Id = C.Cabbie_Status_Id 
+            INNER JOIN CabbieDetail CD ON CD.Cabbie_Id = C.Cabbie_Id
+            INNER JOIN CarModel CM ON CM.Car_Id = CD.Car_Id
+            INNER JOIN CarBrand CB ON CB.CarBrand_Id = CM.CarBrand_Id
             WHERE CS.Cabbie_Status_Id  = 1");
         $dbh->execute();
         $cabbie = $dbh->fetchAll(PDO::FETCH_ASSOC);
@@ -93,12 +97,14 @@ $app->post("/GetPrice/", function() use($app){
                     $distMay = $dis;
                 }
                 else{
-                    if ($distMay < $dis) {
+                    if ($distMay > $dis) {
                         $may = $row;
                         $distMay = $dis;
                     }
                 }      
             }
+
+            $distanceBet = distance($Latitude_In, $Longitude_In, $Latitude_Fn, $Longitude_Fn);
 
             if ($may['PaymentSystem_Id'] == 1) {
                 $dbh = $connection->prepare("SELECT Price, RangD
@@ -110,7 +116,7 @@ $app->post("/GetPrice/", function() use($app){
 
                 foreach($prices as $row) {
                     list($rangeA, $rangeB) = explode(',', $row['RangD']);
-                    if (($distMay >= $rangeA) && ($distMay < $rangeB)) {
+                    if (($distanceBet >= $rangeA) && ($distanceBet < $rangeB)) {
                         $priceF = $row['Price'];
                     }
                 }
@@ -129,7 +135,12 @@ $app->post("/GetPrice/", function() use($app){
                 $resp['LatCabbie'] = $may['Latitude'];
                 $resp['LongCabbie'] = $may['Longitude'];
                 $resp['GcmIdCabbie'] = $may['Gcm_Id'];
+                $resp['Model'] = $may['Model'];
+                $resp['Passengers'] = $may['Passengers'];
+                $resp['Brand'] = $may['Brand'];
                 $resp['Price'] = $priceF;
+                $resp['Image'] = base64_encode($may['Image']);
+                $resp['Dist'] = $distMay;
 
                 $connection = null;
 
