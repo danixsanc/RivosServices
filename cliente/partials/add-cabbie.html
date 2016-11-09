@@ -8,12 +8,12 @@
     
     <div class="from-group col-xs-5">
         <label>Nombre</label>
-        <input type="text" class="form-control" placeholder="Ingrese su nombre" ng-model="cabbie.Name"/>
+        <input type="text" class="form-control" placeholder="Ingrese su nombre" ng-model="cabbie.FirstName"/>
     </div>
     
     <div class="from-group col-xs-5" style="margin-bottom: 10px;">
         <label>Apellido</label>
-        <input type="text" class="form-control" placeholder="Ingrese su apellido" ng-model="cabbie.Lastname"/>
+        <input type="text" class="form-control" placeholder="Ingrese su apellido" ng-model="cabbie.LastName"/>
     </div>
 
     <div class="from-group col-xs-5">
@@ -31,7 +31,7 @@
 
     <div class="from-group col-xs-5">
         <label>Fecha de nacimiento</label>
-        <input type="date" class="form-control datepicker" placeholder="Ingrese su fecha de nacimiento" ng-model="cabbie.date" />
+        <input type="date" class="form-control datepicker" placeholder="Ingrese su fecha de nacimiento" ng-model="cabbie.Born" />
     </div>
 
     <div class="from-group col-xs-5" style="margin-bottom: 10px;">
@@ -64,7 +64,7 @@
     
     <div class="from-group col-xs-5">
         <label>Contraseña</label>
-        <input type="password" class="form-control" placeholder="Ingrese su Contraseña" ng-model="cabbie.password" />
+        <input type="password" class="form-control" placeholder="Ingrese su Contraseña" ng-model="cabbie.Password" />
     </div>
 
     <div class="from-group col-xs-5" style="margin-bottom: 10px;">
@@ -74,7 +74,7 @@
 
     <div class="from-group col-xs-5">
         <label>Repetir Contraseña</label>
-        <input type="password" class="form-control" placeholder="Ingrese su Contraseña" ng-model="cabbie.password" />
+        <input type="password" class="form-control" placeholder="Ingrese su Contraseña" ng-model="cabbie.ConfirmPassword" />
     </div>
     
     <div class="from-group col-xs-5" style="margin-bottom: 10px;">
@@ -82,5 +82,8 @@
         <input type="text" class="form-control" placeholder="Ingrese su correo electrónico" ng-model="cabbie.Email" />
     </div>
 
+    <div class="from-group col-xs-4" style="margin-bottom: 10px;">
+        <button class="btn btn-success" ng-click="saveCabbie(cabbie)"><i class="fa fa-check" aria-hidden="true">Agregar</i></button>
+    </div>
 
 </div>

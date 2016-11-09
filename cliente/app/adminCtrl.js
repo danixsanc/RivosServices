@@ -13,7 +13,7 @@ app.controller('adminCtrl', function ($scope, $rootScope, $routeParams, $locatio
 
     $scope.saveAdmins = function (data){
     	Data.post('save_admins', {data:data}).then(function (results){
-    		$location.path('admins');
+    		$location.path('admin');
     	});
     };
 

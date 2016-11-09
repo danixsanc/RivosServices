@@ -8,30 +8,22 @@
     
     <div class="from-group col-xs-5">
         <label>Nombre</label>
-         <input type="text" class="form-control" placeholder="Ingrese su nombre" ng-model="user.Name"/>
+         <input type="text" class="form-control" placeholder="Ingrese su nombre" ng-model="admin.FirstName"/>
     </div>
     
     <div class="from-group col-xs-5" style="margin-bottom: 10px;">
         <label>Apellido</label>
-        <input type="text" class="form-control" placeholder="Ingrese su apellido" ng-model="user.Lastname" />
+        <input type="text" class="form-control" placeholder="Ingrese su apellido" ng-model="admin.LastName" />
     </div>
         
     <div class="from-group col-xs-5">
         <label>Telefono</label>
-        <input type="text" class="form-control" placeholder="Ingrese su numero de telefono" ng-model="user.Phone" />
-    </div>
-
-    <div class="from-group col-xs-5" style="margin-bottom: 10px;">
-        <label>Fecha de nacimiento</label>
-        <input type="date" class="form-control datepicker" placeholder="Ingrese su fecha de nacimiento" ng-model="user.Date" />
+        <input type="text" class="form-control" placeholder="Ingrese su numero de telefono" ng-model="admin.Phone" />
     </div>
 
     <div class="from-group col-xs-5">
-        <label>Sexo</label>
-        <select class="form-control" ng-model="user.Sex">
-            <option value="1">Masculino</option>
-             <option value="2">Femenino</option>
-        </select>
+        <label>Fecha de nacimiento</label>
+        <input type="date" class="form-control datepicker" placeholder="Ingrese su fecha de nacimiento" ng-model="cabbie.Born" />
     </div>
 
 </div>
@@ -45,27 +37,30 @@
 
     <div class="from-group col-xs-5">
         <label>Compañia</label>
-        <input type="text" class="form-control" placeholder="Ingrese su Compañia" ng-model="user.Company" />
+        <input type="text" class="form-control" placeholder="Ingrese su Compañia" ng-model="admin.Company" />
     </div>
 
     <div class="from-group col-xs-5" style="margin-bottom: 10px;">
         <label>Correo</label>
-        <input type="text" class="form-control" placeholder="Ingrese su correo electrónico" ng-model="user.Email" />
+        <input type="text" class="form-control" placeholder="Ingrese su correo electrónico" ng-model="admin.Email" />
     </div>  
 
     <div class="from-group col-xs-5">
         <label>Contraseña</label>
-        <input type="password" class="form-control" placeholder="Ingrese su Contraseña" ng-model="user.Password" />
+        <input type="password" class="form-control" placeholder="Ingrese su Contraseña" ng-model="admin.Password" />
     </div>
     
     <div class="from-group col-xs-5" style="margin-bottom: 10px;">
         <label>Repetir Contraseña</label>
-        <input type="password" class="form-control" placeholder="Ingrese su Contraseña" ng-model="user.Password" />
+        <input type="password" class="form-control" placeholder="Ingrese su Contraseña" ng-model="admin.Password" />
     </div>
 
     <div class="from-group col-xs-5">
         <label>Numero de contrato</label>
-        <input type="text" class="form-control" placeholder="Ingrese su Numero de contrato" ng-model="user.Contract" />
+        <input type="text" class="form-control" placeholder="Ingrese su Numero de contrato" ng-model="admin.Contract" />
+    </div>
+    <div class="from-group col-xs-4" style="margin-bottom: 10px;">
+        <button class="btn btn-success" ng-click="saveAdmins(admin)"><i class="fa fa-check" aria-hidden="true">Agregar</i></button>
     </div>
 
   </div>

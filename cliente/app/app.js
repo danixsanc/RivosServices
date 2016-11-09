@@ -40,7 +40,7 @@ app.config([
             .when('/add-cabbie', {
                 title: 'Real Time',
                 templateUrl: 'partials/add-cabbie.html',
-                controller: 'realTimeCtrl'
+                controller: 'cabbieCtrl'
             })
             .when('/ver-solicitudes', {
                 title: 'Solicitudes',

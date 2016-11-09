@@ -12,9 +12,9 @@ app.controller('cabbieCtrl', function ($scope, $rootScope, $routeParams, $locati
             } });
     };
 
-    $scope.saveCabbies = function (data){
-    	Data.post('save_cabbies', {data:data}).then(function (results){
-    		$location.path('cabbies');
+    $scope.saveCabbie = function (data){
+    	Data.post('save_cabbie', {data:data}).then(function (results){
+    		$location.path('cabbie');
     	});
     };
 

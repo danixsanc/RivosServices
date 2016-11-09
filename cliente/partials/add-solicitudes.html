@@ -8,7 +8,7 @@
     
     <div class="from-group col-xs-5">
         <label>Nombre</label>
-        <input type="text" class="form-control" placeholder="Ingrese su nombre" ng-model="cabbie.Name"/>
+        <input type="text" class="form-control" placeholder="Ingrese su nombre" ng-model="request.Name"/>
     </div>
     
     <div class="from-group col-xs-5" style="margin-bottom: 10px;">
@@ -69,5 +69,8 @@
         <input type="text" class="form-control" placeholder="Ingrese la unidad asignada"ng-model="reservation.Unitynumber"/>
     </div>
 
+    <div class="from-group col-xs-4" style="margin-bottom: 10px;">
+        <button class="btn btn-success" ng-click="saveCabbie(cabbie)"><i class="fa fa-check" aria-hidden="true">Agregar</i></button>
+    </div>
 
 </div>
