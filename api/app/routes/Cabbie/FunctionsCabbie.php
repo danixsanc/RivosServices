@@ -12,7 +12,7 @@ $app->post("/statusCabbie/", function() use($app){
     try{
 
         $connection = getConnection();
-        $dbh = $connection->prepare("UPDATE Cabbie SET Cabbie_Status_Id = :S WHERE Cabbie_Id = :CAI");
+        $dbh = $connection->prepare("UPDATE Cabbie SET CabbieActv_Id = :S WHERE Cabbie_Id = :CAI");
         $dbh->bindParam(':CAI', $cabbie_id);
         $dbh->bindParam(':S', $status);
         $dbh->execute();
@@ -185,4 +185,9 @@ $app->post("/message/", function() use($app){
         echo "Error: " . $e->getMessage();
     }
 });
+
+
+//historial
+
+
 

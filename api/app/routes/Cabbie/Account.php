@@ -14,7 +14,11 @@ $app->post("/cabbieLogin/", function() use($app){
     try{
 
         $connection = getConnection();
-        $dbh = $connection->prepare("SELECT Cabbie_Id, FirstName, LastName, Email, Phone, Password, Salt FROM Cabbie WHERE Email = :E");
+        $dbh = $connection->prepare("SELECT C.Cabbie_Id, C.FirstName, C.LastName, C.Email, C.Phone, C.Password, C.Salt,
+            CD.Image
+            FROM Cabbie C
+            INNER JOIN CabbieDetail CD ON C.Cabbie_Id = CD.Cabbie_Id
+            WHERE Email = :E");
         $dbh->bindParam(':E', $email);
         $dbh->execute();
         $cabbie = $dbh->fetchObject();

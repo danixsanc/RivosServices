@@ -7,6 +7,7 @@ function get_cabbie_data($cabbie){
     $dataResp['Name'] = $cabbie->FirstName . ' ' . $cabbie->LastName;
     $dataResp['Email'] = $cabbie->Email;
     $dataResp['Phone'] = $cabbie->Phone;
+    $dataResp['Image'] = base64_encode($cabbie->Image);
     return $dataResp;
 }
 
