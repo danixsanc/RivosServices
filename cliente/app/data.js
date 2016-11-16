@@ -2,7 +2,7 @@ app.factory("Data", ['$http',
     function ($http) { // This service connects to our REST API
 
         //var serviceBase = 'api/v1/';
-        var serviceBase = 'http://localhosts/RivosServices/RivosServices/api/';
+        var serviceBase = 'http://localhost:92/RivosServices/RivosServices/api/';
 
         var obj = {};
         obj.toast = function (data) {
