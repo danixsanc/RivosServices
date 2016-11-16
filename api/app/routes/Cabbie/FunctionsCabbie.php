@@ -187,6 +187,55 @@ $app->post("/message/", function() use($app){
 });
 
 
+
+
+$app->post("/actualizar_taxistas_location/", function() use($app){
+
+    $json = $app->request->getBody();
+    $data = json_decode($json, true);
+ 
+    $dataf = $data['data'];
+
+    $latitude = $dataf['latitude'];
+    $longitude = $dataf['longitude'];
+
+    try{
+
+        $connection = getConnection();
+        $dbh = $connection->prepare("UPDATE Location_Cabbie SET Latitude = :LAT, Longitude = :LON WHERE Cabbie_Id = 1");
+        $dbh->bindParam(':LAT', $latitude);
+        $dbh->bindParam(':LON', $longitude);
+        $dbh->execute();
+
+        if ($dbh) {
+
+            $connection = null;
+            $response['Message'] = "OK";
+            $response['IsError'] = false;
+            $response['Data'] = null;
+
+            $app->response->headers->set("Content-type", "application/json");
+            $app->response->status(200);
+            $app->response->body(json_encode($response));
+        }
+        else {
+            $connection = null;
+
+            $response['Message'] = "Error al enviar mensaje";
+            $response['IsError'] = true;
+            $response['Data'] = null;
+
+            $app->response->headers->set("Content-type", "application/json");
+            $app->response->status(200);
+            $app->response->body(json_encode($response));  
+        }
+
+    }catch(PDOException $e){
+        echo "Error: " . $e->getMessage();
+    }
+});
+
+
 //historial
 
 

@@ -5,5 +5,19 @@
 </head>
 <body ng-init="intervalFunction()">
 SOCKET
+
+
+<div class="from-group col-xs-5" style="margin-bottom: 10px;">
+        <label>Latitude</label>
+        <input type="number" step="0.00001" class="form-control" ng-model="data.latitude"
+        ng-change="actCabbieData(data);"/>
+    </div>
+
+    <div class="from-group col-xs-5" style="margin-bottom: 10px;">
+        <label>Longitude</label>
+        <input type="number" step="0.00001" class="form-control" ng-model="data.longitude"
+        ng-change="actCabbieData(data);"/>
+    </div>
+
 </body>
 </html>

@@ -17,6 +17,8 @@ require 'app/routes/User/FavoritePlace.php';
 require 'app/routes/User/History.php';
 require 'app/routes/User/Card.php';
 require 'app/routes/User/FunctionsUser.php';
+require 'app/routes/User/CabbieInf.php';
+
 //Cabbie Lib Require
 require 'app/routes/Cabbie/Account.php';
 require 'app/routes/Cabbie/Coordinates.php';
@@ -25,12 +27,12 @@ require 'app/routes/Cabbie/Request.php';
 
 //Admin Lib Require
 require 'app/routes/Admin/Request.php';
-require 'app/routes/Admin/Cabbie.php';
+//require 'app/routes/Admin/Cabbie.php';
 require 'app/routes/Admin/Account.php';
-require 'app/routes/Admin/Admin.php';
-require 'app/routes/Admin/Car.php';
-require 'app/routes/Admin/Reservation.php';
-require 'app/routes/Admin/Message_client.php';
+//require 'app/routes/Admin/Admin.php';
+//require 'app/routes/Admin/Car.php';
+//require 'app/routes/Admin/Reservation.php';
+//require 'app/routes/Admin/Message_client.php';
 
 //Global Lib Require
 require 'app/routes/Global/Functions.php';
